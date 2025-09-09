@@ -44,10 +44,15 @@ public class Workload {
     }
 
     public boolean isOverloaded() {
-        if (worker == null) {
-            return false;
-        }
-        int totalWork = worker.getCurrentWorkload() + hoursAssigned;
-        return totalWork > 40;
+        return hoursAssigned > 40;
+    }
+
+    public void addHours(int hours) {
+        this.hoursAssigned += hours;
+    }
+
+    public void reduceHours(int hours) {
+        this.hoursAssigned -= hours;
+        if (hoursAssigned < 0) hoursAssigned = 0;
     }
 }
