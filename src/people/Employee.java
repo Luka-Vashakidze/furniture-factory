@@ -1,11 +1,14 @@
 package people;
 
+import workload.Workload;
+
 public abstract class Employee {
 
     private static int employeeCounter;
-    protected Integer id;
+    private Integer id;
     private String name;
-    protected Double salary;
+    private Double salary;
+    private Workload workload;
 
     static {
         employeeCounter = 0;
@@ -48,6 +51,14 @@ public abstract class Employee {
 
     public void setSalary(double salary) {
         this.salary = salary;
+    }
+
+    public Workload getWorkload() {
+        return workload;
+    }
+
+    public void setWorkload(Workload workload) {
+        this.workload = workload;
     }
 
     public void giveRaise(double percent) {

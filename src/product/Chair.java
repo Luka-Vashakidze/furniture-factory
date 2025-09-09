@@ -8,7 +8,7 @@ public class Chair extends Furniture {
 
     private int legs;
     private boolean hasArmrest;
-    protected double weightCapacity;
+    private double weightCapacity;
 
     public Chair(String name, BigDecimal basePrice, Material[] materials, int legs, boolean hasArmrest, double weightCapacity) {
         super(name, basePrice, materials);

@@ -3,7 +3,7 @@ package people;
 public class Manager extends Employee {
 
     private String department;
-    protected double bonus;
+    private double bonus;
 
     public Manager(Integer id, String name, Double salary, String department, double bonus) {
         super(id, name, salary);
@@ -43,15 +43,16 @@ public class Manager extends Employee {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) return false;
-        if (!(obj instanceof Manager)) return false;
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
         Manager other = (Manager) obj;
-        return this.id.equals(other.id);
+        return this.getId() == other.getId();
     }
 
     @Override
     public int hashCode() {
-        return id;
+        return getId();
     }
+
 
 }

@@ -5,9 +5,12 @@ import people.*;
 import material.*;
 import product.*;
 import order.*;
-import workload.*;
+import service.EmployeeService;
+import workload.Workload;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Main {
 
@@ -15,84 +18,37 @@ public class Main {
 
         Factory factory = new Factory();
 
-        System.out.println("Factory initialized. Total factories: " + Factory.getFactoryCounter());
-        System.out.println();
+        Material wood = new Material("Wood", BigDecimal.valueOf(50), 100);
+        Material metal = new Material("Metal", BigDecimal.valueOf(30), 50);
+        Material fabric = new Material("Fabric", BigDecimal.valueOf(20), 200);
+        factory.setMaterials(new Material[]{wood, metal, fabric});
 
-        Material[] materials = factory.getMaterials();
-        System.out.println("Materials:");
-        for (int i = 0; i < materials.length; i++) {
-            Material m = materials[i];
-            System.out.println(m.getName() + " total cost: $" + m.calculateTotalCost());
-        }
-        System.out.println();
+        Furniture chairFurniture = new Furniture("Chair Model A", BigDecimal.valueOf(100),
+                new Material[]{wood, fabric});
+        Furniture tableFurniture = new Furniture("Table Model B", BigDecimal.valueOf(200),
+                new Material[]{wood, metal});
+        factory.setFurnitureItems(new Furniture[]{chairFurniture, tableFurniture});
 
+        Chair chair1 = new Chair("Chair Model A", BigDecimal.valueOf(100),
+                new Material[]{wood, fabric}, 4, true, 120);
+        Table table1 = new Table("Table Model B", BigDecimal.valueOf(200),
+                new Material[]{wood, metal}, 150, 80, 75, true);
+        factory.setChairs(new Chair[]{chair1});
+        factory.setTables(new Table[]{table1});
 
-        Furniture[] furnitureItems = factory.getFurnitureItems();
-        System.out.println("Furniture:");
-        for (int i = 0; i < furnitureItems.length; i++) {
-            Furniture f = furnitureItems[i];
-            System.out.println(f.getName() + " total cost: $" + f.calculateTotalCost());
-        }
-        System.out.println();
+        Worker worker1 = new Worker(1, "Luka", 2000.0, 5);
+        Worker worker2 = new Worker(2, "Taia", 1800.0, 4);
+        Manager manager = new Manager(3, "Levan", 2500.0, "Production", 500);
+        factory.setEmployees(new Employee[]{worker1, worker2, manager});
 
-        Chair[] chairs = factory.getChairs();
-        System.out.println("Chairs:");
-        for (int i = 0; i < chairs.length; i++) {
-            Chair c = chairs[i];
-            System.out.println(c.getName() + " legs: " + c.getLegs() + ", armrest: " + c.hasArmrest() +
-                    ", total price: $" + c.calculateTotalCost());
-        }
-        System.out.println();
+        worker1.setWorkload(new Workload(worker1, 10, LocalDateTime.now().plusDays(2)));
+        worker2.setWorkload(new Workload(worker2, 15, LocalDateTime.now().plusDays(3)));
 
-        Table[] tables = factory.getTables();
-        System.out.println("Tables:");
-        for (int i = 0; i < tables.length; i++) {
-            Table t = tables[i];
-            System.out.println(t.getName() + " size: " + t.getLength() + "x" + t.getWidth() + "x" + t.getHeight() +
-                    ", drawers: " + t.hasDrawers() + ", total price: $" + t.calculateTotalCost());
-        }
-        System.out.println();
+        EmployeeService service = new EmployeeService();
+        service.giveRaise(worker1, 10.0);
+        service.printEmployeeRole(manager);
 
-        Employee[] employees = factory.getEmployees();
-        System.out.println("Employees:");
-        for (int i = 0; i < employees.length; i++) {
-            Employee e = employees[i];
-            System.out.println(e.getName() + " (ID: " + e.getId() + "), salary: $" + e.getSalary());
-        }
-        System.out.println();
-
-        Worker[] workers = factory.getWorkers();
-        System.out.println("Workers:");
-        for (int i = 0; i < workers.length; i++) {
-            Worker w = workers[i];
-            System.out.println(w.getName() + " (skill: " + w.getSkillLevel() + ", workload: " + w.getCurrentWorkload() + ")");
-        }
-        System.out.println();
-
-        Manager[] managers = factory.getManagers();
-        System.out.println("Managers:");
-        for (int i = 0; i < managers.length; i++) {
-            Manager m = managers[i];
-            System.out.println(m.getName() + " (department: " + m.getDepartment() + "), salary with bonus: $" + m.calculateSalaryWithBonus());
-        }
-        System.out.println();
-
-        Order[] orders = factory.getOrders();
-        System.out.println("Orders:");
-        for (int i = 0; i < orders.length; i++) {
-            Order o = orders[i];
-            System.out.println("Order #" + o.getOrderId() + " by " + o.getCustomerName() +
-                    ", total: $" + o.calculateTotalPrice());
-        }
-        System.out.println();
-
-        Workload[] workloads = factory.getWorkloads();
-        System.out.println("Workloads:");
-        for (int i = 0; i < workloads.length; i++) {
-            Workload wl = workloads[i];
-            System.out.println("Worker " + wl.getWorker().getName() +
-                    " assigned hours: " + wl.getHoursAssigned() +
-                    ", overloaded? " + wl.isOverloaded());
-        }
+        Order order1 = new Order(101, "Customer XYZ", factory.getFurnitureItems(), LocalDate.now());
+        factory.setOrders(new Order[]{order1});
     }
 }
