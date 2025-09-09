@@ -1,30 +1,24 @@
 package product;
 
+import material.Material;
+
 import java.math.BigDecimal;
 
-public class Chair {
+public class Chair extends Furniture {
 
-    private Furniture furniture;
     private int legs;
     private boolean hasArmrest;
-    private double weightCapacity; // in kg
+    protected double weightCapacity;
 
-    public Chair(Furniture furniture, int legs, boolean hasArmrest, double weightCapacity) {
-        this.furniture = furniture;
+    public Chair(String name, BigDecimal basePrice, Material[] materials, int legs, boolean hasArmrest, double weightCapacity) {
+        super(name, basePrice, materials);
         this.legs = legs;
         this.hasArmrest = hasArmrest;
         this.weightCapacity = weightCapacity;
     }
 
     public Chair() {
-    }
-
-    public Furniture getFurniture() {
-        return furniture;
-    }
-
-    public void setFurniture(Furniture furniture) {
-        this.furniture = furniture;
+        super();
     }
 
     public int getLegs() {
@@ -35,7 +29,7 @@ public class Chair {
         this.legs = legs;
     }
 
-    public boolean isHasArmrest() {
+    public boolean hasArmrest() {
         return hasArmrest;
     }
 
@@ -51,17 +45,12 @@ public class Chair {
         this.weightCapacity = weightCapacity;
     }
 
-    public BigDecimal calculateTotalPrice() {
-        BigDecimal total = BigDecimal.ZERO;
-
-        if (furniture != null) {
-            total = furniture.calculateTotalCost();
-        }
-
+    @Override
+    public BigDecimal calculateTotalCost() {
+        BigDecimal total = super.calculateTotalCost();
         if (hasArmrest) {
             total = total.add(BigDecimal.valueOf(15));
         }
-
         return total;
     }
 }

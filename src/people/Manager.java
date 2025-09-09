@@ -1,26 +1,19 @@
 package people;
 
-public class Manager {
-    private Employee employee;
-    private String department;
-    private double bonus;
+public class Manager extends Employee {
 
-    public Manager(Employee employee, String department, double bonus) {
-        this.employee = employee;
+    private String department;
+    protected double bonus;
+
+    public Manager(Integer id, String name, Double salary, String department, double bonus) {
+        super(id, name, salary);
         this.department = department;
         this.bonus = bonus;
     }
 
-    public Manager() {
-
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    @Override
+    public String getRoleDescription() {
+        return "Manager of department " + department;
     }
 
     public String getDepartment() {
@@ -40,6 +33,25 @@ public class Manager {
     }
 
     public double calculateSalaryWithBonus() {
-        return employee.getSalary() + bonus;
+        return getSalary() + bonus;
     }
+
+    @Override
+    public String toString() {
+        return "Manager: " + getName() + ", Department: " + department + ", Bonus: " + bonus;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (!(obj instanceof Manager)) return false;
+        Manager other = (Manager) obj;
+        return this.id.equals(other.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
 }

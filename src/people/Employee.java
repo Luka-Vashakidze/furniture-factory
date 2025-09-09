@@ -1,12 +1,11 @@
 package people;
 
-public class Employee {
-
-    private int id;
-    private String name;
-    private double salary;
+public abstract class Employee {
 
     private static int employeeCounter;
+    protected Integer id;
+    private String name;
+    protected Double salary;
 
     static {
         employeeCounter = 0;
@@ -19,6 +18,9 @@ public class Employee {
         this.salary = salary;
         employeeCounter++;
     }
+
+    public abstract String getRoleDescription();
+
 
     public Employee() {
         employeeCounter++;

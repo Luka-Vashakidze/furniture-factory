@@ -1,17 +1,19 @@
 package product;
 
+import material.Material;
+
 import java.math.BigDecimal;
 
-public class Table {
+public class Table extends Furniture {
 
-    private Furniture furniture;
     private int length;
     private int width;
     private int height;
     private boolean hasDrawers;
 
-    public Table(Furniture furniture, int length, int width, int height, boolean hasDrawers) {
-        this.furniture = furniture;
+    public Table(String name, BigDecimal basePrice, Material[] materials,
+                 int length, int width, int height, boolean hasDrawers) {
+        super(name, basePrice, materials);
         this.length = length;
         this.width = width;
         this.height = height;
@@ -19,14 +21,7 @@ public class Table {
     }
 
     public Table() {
-    }
-
-    public Furniture getFurniture() {
-        return furniture;
-    }
-
-    public void setFurniture(Furniture furniture) {
-        this.furniture = furniture;
+        super();
     }
 
     public int getLength() {
@@ -53,7 +48,7 @@ public class Table {
         this.height = height;
     }
 
-    public boolean isHasDrawers() {
+    public boolean hasDrawers() {
         return hasDrawers;
     }
 
@@ -61,18 +56,31 @@ public class Table {
         this.hasDrawers = hasDrawers;
     }
 
-    public BigDecimal calculateTotalPrice() {
-        BigDecimal total = BigDecimal.ZERO;
-
-        if (furniture != null) {
-            total = furniture.calculateTotalCost();
-        }
-
+    @Override
+    public BigDecimal calculateTotalCost() {
+        BigDecimal total = super.calculateTotalCost();
         if (hasDrawers) {
             total = total.add(BigDecimal.valueOf(30));
         }
-
-
         return total;
     }
+
+    @Override
+    public String toString() {
+        return "table: " + getName() + ", size: " + length + "x" + width + "x" + height + ", Drawers: " + hasDrawers;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (!(obj instanceof Table)) return false;
+        Table other = (Table) obj;
+        return this.getName().equals(other.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return getName().hashCode();
+    }
+
 }

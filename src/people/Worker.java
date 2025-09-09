@@ -1,26 +1,24 @@
 package people;
 
-public class Worker {
+public class Worker extends Employee {
 
-    private Employee employee;
-    private int skillLevel;
+    protected int skillLevel;
     private int currentWorkload;
 
-    public Worker(Employee employee, int skillLevel) {
-        this.employee = employee;
+    public Worker(Integer id, String name, double salary, int skillLevel) {
+        super(id, name, salary);
         this.skillLevel = skillLevel;
         this.currentWorkload = 0;
     }
 
     public Worker() {
+        super();
+        this.currentWorkload = 0;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    @Override
+    public String getRoleDescription() {
+        return "Worker with skill level " + skillLevel;
     }
 
     public int getSkillLevel() {
@@ -48,6 +46,25 @@ public class Worker {
     public void finishTask(int workload) {
         this.currentWorkload -= workload;
         if (this.currentWorkload < 0) this.currentWorkload = 0;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Worker{" + "id=" + id + ", name=" + getName() + ", skillLevel=" + skillLevel + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Worker)) return false;
+        Worker w = (Worker) o;
+        return id.equals(w.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 
 

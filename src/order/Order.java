@@ -7,12 +7,12 @@ import java.time.LocalDate;
 
 public class Order {
 
-    private int orderId;
+    private static int orderCounter;
+    private Integer orderId;
     private String customerName;
     private Furniture[] items;
     private LocalDate orderDate;
 
-    private static int orderCounter;
 
     static {
         orderCounter = 0;
