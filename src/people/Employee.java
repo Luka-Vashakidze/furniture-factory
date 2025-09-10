@@ -6,13 +6,12 @@ public abstract class Employee {
 
     private static int employeeCounter;
     private Integer id;
-    private String name;
-    private Double salary;
+    protected String name;
+    protected Double salary;
     private Workload workload;
 
     static {
         employeeCounter = 0;
-
     }
 
     public Employee(int id, String name, double salary) {
@@ -23,7 +22,6 @@ public abstract class Employee {
     }
 
     public abstract String getRoleDescription();
-
 
     public Employee() {
         employeeCounter++;

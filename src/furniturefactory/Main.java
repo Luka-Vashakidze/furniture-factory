@@ -23,18 +23,13 @@ public class Main {
         Material fabric = new Material("Fabric", BigDecimal.valueOf(20), 200);
         factory.setMaterials(new Material[]{wood, metal, fabric});
 
-        Furniture chairFurniture = new Furniture("Chair Model A", BigDecimal.valueOf(100),
-                new Material[]{wood, fabric});
-        Furniture tableFurniture = new Furniture("Table Model B", BigDecimal.valueOf(200),
-                new Material[]{wood, metal});
-        factory.setFurnitureItems(new Furniture[]{chairFurniture, tableFurniture});
-
-        Chair chair1 = new Chair("Chair Model A", BigDecimal.valueOf(100),
+        Chair chair = new Chair("Chair Model A", BigDecimal.valueOf(100),
                 new Material[]{wood, fabric}, 4, true, 120);
-        Table table1 = new Table("Table Model B", BigDecimal.valueOf(200),
+
+        Table table = new Table("Table Model B", BigDecimal.valueOf(200),
                 new Material[]{wood, metal}, 150, 80, 75, true);
-        factory.setChairs(new Chair[]{chair1});
-        factory.setTables(new Table[]{table1});
+
+        factory.setFurnitureItems(new Furniture[]{chair, table});
 
         Worker worker1 = new Worker(1, "Luka", 2000.0, 5);
         Worker worker2 = new Worker(2, "Taia", 1800.0, 4);
@@ -50,5 +45,15 @@ public class Main {
 
         Order order1 = new Order(101, "Customer XYZ", factory.getFurnitureItems(), LocalDate.now());
         factory.setOrders(new Order[]{order1});
+
+        System.out.println("Factory Furniture:");
+        for (Furniture f : factory.getFurnitureItems()) {
+            System.out.println(f);
+        }
+
+        System.out.println("\nEmployees:");
+        for (Employee e : factory.getEmployees()) {
+            System.out.println(e);
+        }
     }
 }

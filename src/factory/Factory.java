@@ -1,38 +1,17 @@
 package factory;
 
-import people.*;
-import material.*;
-import product.*;
-import order.*;
-import workload.*;
+import material.Material;
+import order.Order;
+import people.Employee;
+import product.Furniture;
 
 public class Factory {
 
-    private static int factoryCounter;
-
-    static {
-        factoryCounter = 0;
-    }
-
-    // Material
     private Material[] materials;
-
-    // Furniture
     private Furniture[] furnitureItems;
-    private Chair[] chairs;
-    private Table[] tables;
-
-    // Employees
     private Employee[] employees;
-
-    // Orders
     private Order[] orders;
 
-    public Factory() {
-        factoryCounter++;
-    }
-
-    // Getters and setters
     public Material[] getMaterials() {
         return materials;
     }
@@ -49,22 +28,6 @@ public class Factory {
         this.furnitureItems = furnitureItems;
     }
 
-    public Chair[] getChairs() {
-        return chairs;
-    }
-
-    public void setChairs(Chair[] chairs) {
-        this.chairs = chairs;
-    }
-
-    public Table[] getTables() {
-        return tables;
-    }
-
-    public void setTables(Table[] tables) {
-        this.tables = tables;
-    }
-
     public Employee[] getEmployees() {
         return employees;
     }
@@ -79,9 +42,5 @@ public class Factory {
 
     public void setOrders(Order[] orders) {
         this.orders = orders;
-    }
-
-    public static int getFactoryCounter() {
-        return factoryCounter;
     }
 }

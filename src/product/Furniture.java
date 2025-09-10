@@ -7,8 +7,8 @@ import java.math.BigDecimal;
 public class Furniture {
 
     private String name;
-    private BigDecimal basePrice;
-    private Material[] materials;
+    protected BigDecimal basePrice;
+    protected Material[] materials;
 
     public Furniture(String name, BigDecimal basePrice, Material[] materials) {
         this.name = name;
