@@ -12,6 +12,7 @@ import java.time.LocalDate;
 public class Order implements Discountable, Deliverable, Payable {
 
     private static int orderCounter;
+
     private Integer orderId;
     private String customerName;
     private Furniture[] items;

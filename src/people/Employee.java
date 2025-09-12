@@ -5,6 +5,7 @@ import workload.Workload;
 public abstract class Employee {
 
     private static int employeeCounter;
+
     private Integer id;
     protected String name;
     protected Double salary;

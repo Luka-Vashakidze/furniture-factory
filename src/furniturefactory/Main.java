@@ -10,6 +10,7 @@ import material.*;
 import product.*;
 import order.*;
 import service.EmployeeService;
+import service.OrderService;
 import workload.Workload;
 
 import java.math.BigDecimal;
@@ -51,19 +52,18 @@ public class Main {
         factory.setOrders(new Order[]{order1});
 
         System.out.println("Factory Furniture:");
-        for (Furniture f : factory.getFurnitureItems()) {
-            System.out.println(f);
+        for (Furniture furniture : factory.getFurnitureItems()) {
+            System.out.println(furniture);
         }
 
         System.out.println("\nEmployees:");
-        for (Employee e : factory.getEmployees()) {
-            System.out.println(e);
+        for (Employee employee : factory.getEmployees()) {
+            System.out.println(employee);
         }
 
-        for (Furniture f : factory.getFurnitureItems()) {
-            if (f instanceof Buildable) {
-                Buildable b = (Buildable) f;
-                b.assemble();
+        for (Furniture furniture : factory.getFurnitureItems()) {
+            if (furniture instanceof Buildable buildable) {
+                buildable.assemble();
             }
         }
 
@@ -72,14 +72,17 @@ public class Main {
             d.applyDiscount(BigDecimal.valueOf(10));
         }
 
-        for (Employee e : factory.getEmployees()) {
-            if (e instanceof WorkAssignable) {
-                WorkAssignable w = (WorkAssignable) e;
-                Workload wl = new Workload((Worker) e, 5, LocalDateTime.now().plusDays(1));
-                w.assignWork(wl);
+        for (Employee employee : factory.getEmployees()) {
+            if (employee instanceof WorkAssignable) {
+                WorkAssignable workAssignable = (WorkAssignable) employee;
+                Workload wl = new Workload((Worker) employee, 5, LocalDateTime.now().plusDays(1));
+                workAssignable.assignWork(wl);
             }
         }
 
         ((Payable) order1).pay(order1.calculateTotalPrice());
+
+        OrderService.InterfaceService interfaceService = new OrderService.InterfaceService();
+        interfaceService.assembleAllFurniture(factory.getFurnitureItems());
     }
 }

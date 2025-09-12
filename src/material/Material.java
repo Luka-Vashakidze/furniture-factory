@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 public class Material {
 
     private static int materialCounter;
+
     private String name;
     private BigDecimal pricePerUnit;
     private int quantityInStock;

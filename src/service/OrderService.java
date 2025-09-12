@@ -1,5 +1,6 @@
 package service;
 
+import interfaces.Buildable;
 import order.Order;
 import product.Furniture;
 
@@ -37,4 +38,20 @@ public class OrderService {
     public final void printSummary(Order order) {
         System.out.println("final order summary for: " + order.getCustomerName());
     }
+    public static class InterfaceService {
+
+        public void assembleAllFurniture(Furniture[] furnitures) {
+            System.out.println("\n Assembling all buildable furniture  ");
+            if (furnitures == null)
+                return;
+
+            for (Furniture furniture : furnitures) {
+                if (furniture instanceof Buildable buildableItem) {
+                    buildableItem.assemble();
+                }
+            }
+        }
+
+    }
+
 }
