@@ -1,10 +1,11 @@
 package product;
 
+import interfaces.Buildable;
 import material.Material;
 
 import java.math.BigDecimal;
 
-public class Table extends Furniture {
+public class Table extends Furniture implements Buildable {
 
     private int length;
     private int width;
@@ -82,5 +83,12 @@ public class Table extends Furniture {
     public int hashCode() {
         return getName().hashCode();
     }
-
+    @Override
+    public void assemble() {
+        System.out.println("table assembled. " + getName());
+    }
+    @Override
+    public void disassemble() {
+        System.out.println("table disassembled. " + getName());
+    }
 }

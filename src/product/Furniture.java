@@ -1,10 +1,11 @@
 package product;
 
+import interfaces.Discountable;
 import material.Material;
 
 import java.math.BigDecimal;
 
-public class Furniture {
+public class Furniture implements Discountable {
 
     private String name;
     protected BigDecimal basePrice;
@@ -53,5 +54,15 @@ public class Furniture {
         }
 
         return total;
+    }
+
+    @Override
+    public void applyDiscount(BigDecimal percentage) {
+        BigDecimal discount = basePrice.multiply(percentage).divide(BigDecimal.valueOf(100));
+        basePrice = basePrice.subtract(discount);
+    }
+    @Override
+    public String toString() {
+        return getName() + " (price: " + basePrice + ")";
     }
 }

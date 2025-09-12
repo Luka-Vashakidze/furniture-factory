@@ -9,7 +9,6 @@ public class Material {
     private BigDecimal pricePerUnit;
     private int quantityInStock;
 
-
     static {
         materialCounter = 0;
     }

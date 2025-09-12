@@ -2,7 +2,7 @@ package service;
 
 import people.*;
 
-public class EmployeeService {
+public final class EmployeeService {
 
     public void giveRaise(Employee employee, double percent) {
         employee.giveRaise(percent);

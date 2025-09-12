@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 
 public class Workload {
 
+    private final LocalDateTime CREATED_AT = LocalDateTime.now();
+
     private Worker worker;
     private int hoursAssigned;
     private LocalDateTime deadline;

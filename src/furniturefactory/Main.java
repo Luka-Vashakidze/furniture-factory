@@ -1,6 +1,10 @@
 package furniturefactory;
 
 import factory.Factory;
+import interfaces.Buildable;
+import interfaces.Discountable;
+import interfaces.Payable;
+import interfaces.WorkAssignable;
 import people.*;
 import material.*;
 import product.*;
@@ -55,5 +59,27 @@ public class Main {
         for (Employee e : factory.getEmployees()) {
             System.out.println(e);
         }
+
+        for (Furniture f : factory.getFurnitureItems()) {
+            if (f instanceof Buildable) {
+                Buildable b = (Buildable) f;
+                b.assemble();
+            }
+        }
+
+        Discountable[] discountables = { (Discountable) factory.getFurnitureItems()[0], order1 };
+        for (Discountable d : discountables) {
+            d.applyDiscount(BigDecimal.valueOf(10));
+        }
+
+        for (Employee e : factory.getEmployees()) {
+            if (e instanceof WorkAssignable) {
+                WorkAssignable w = (WorkAssignable) e;
+                Workload wl = new Workload((Worker) e, 5, LocalDateTime.now().plusDays(1));
+                w.assignWork(wl);
+            }
+        }
+
+        ((Payable) order1).pay(order1.calculateTotalPrice());
     }
 }

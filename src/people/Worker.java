@@ -1,6 +1,9 @@
 package people;
 
-public class Worker extends Employee {
+import interfaces.WorkAssignable;
+import workload.Workload;
+
+public class Worker extends Employee implements WorkAssignable {
 
     private int skillLevel;
 
@@ -42,5 +45,9 @@ public class Worker extends Employee {
     @Override
     public int hashCode() {
         return getId();
+    }
+    @Override
+    public void assignWork(Workload workload) {
+        System.out.println(getName() + " assigned workload: " + workload.getHoursAssigned() + " hours");
     }
 }

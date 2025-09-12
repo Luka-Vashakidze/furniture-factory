@@ -34,4 +34,7 @@ public class OrderService {
     public static int getOrderCounter() {
         return orderCounter;
     }
+    public final void printSummary(Order order) {
+        System.out.println("final order summary for: " + order.getCustomerName());
+    }
 }

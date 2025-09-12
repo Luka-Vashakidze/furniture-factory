@@ -1,11 +1,15 @@
 package order;
 
+import interfaces.Deliverable;
+import interfaces.Discountable;
+import interfaces.Payable;
 import product.Furniture;
 
+import javax.swing.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class Order {
+public class Order implements Discountable, Deliverable, Payable {
 
     private static int orderCounter;
     private Integer orderId;
@@ -13,7 +17,8 @@ public class Order {
     private Furniture[] items;
     private LocalDate orderDate;
 
-
+    private boolean delivered;
+    private boolean paid;
     static {
         orderCounter = 0;
     }
@@ -78,5 +83,22 @@ public class Order {
 
     public static int getOrderCounter() {
         return orderCounter;
+    }
+
+    @Override
+    public void applyDiscount(BigDecimal percentage) {
+        for (Furniture f : items){
+            if (f instanceof Discountable d) {
+                d.applyDiscount(percentage);
+            }
+        }
+    }
+    @Override
+    public void deliver() {
+        System.out.println("Order delivered.");
+    }
+    @Override
+    public void pay(BigDecimal amount) {
+        System.out.println("Paid: " + amount);
     }
 }
