@@ -1,6 +1,8 @@
 package service;
 
-import people.*;
+import people.Employee;
+import people.Manager;
+import people.Worker;
 
 public final class EmployeeService {
 

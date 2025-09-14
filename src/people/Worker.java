@@ -46,6 +46,7 @@ public class Worker extends Employee implements WorkAssignable {
     public int hashCode() {
         return getId();
     }
+
     @Override
     public void assignWork(Workload workload) {
         System.out.println(getName() + " assigned workload: " + workload.getHoursAssigned() + " hours");

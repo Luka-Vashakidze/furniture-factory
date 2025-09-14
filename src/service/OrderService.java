@@ -1,5 +1,7 @@
 package service;
 
+import exceptions.AssemblyFailedException;
+import exceptions.InsufficientMaterialsException;
 import interfaces.Buildable;
 import order.Order;
 import product.Furniture;
@@ -35,23 +37,34 @@ public class OrderService {
     public static int getOrderCounter() {
         return orderCounter;
     }
+
     public final void printSummary(Order order) {
         System.out.println("final order summary for: " + order.getCustomerName());
     }
+
     public static class InterfaceService {
 
-        public void assembleAllFurniture(Furniture[] furnitures) {
-            System.out.println("\n Assembling all buildable furniture  ");
-            if (furnitures == null)
-                return;
+        public void assembleFurniture(Buildable buildableItem) {
+            if (buildableItem == null) {
+                throw new AssemblyFailedException("Nothing to assemble.");
+            }
 
-            for (Furniture furniture : furnitures) {
-                if (furniture instanceof Buildable buildableItem) {
-                    buildableItem.assemble();
+            String itemName = "Buildable item";
+            if (buildableItem instanceof Furniture f) {
+                itemName = f.getName();
+                if (f.getMaterials() == null || f.getMaterials().length == 0) {
+                    throw new InsufficientMaterialsException("no materials for : " + itemName);
                 }
             }
+
+            try (AssemblySession session = new AssemblySession(itemName)) {
+                System.out.println("Starting assembly .");
+                buildableItem.assemble();
+                System.out.println("Asembly finished.");
+            } catch (Exception e) {
+                System.out.println("Assembly failed : " + e.getMessage());
+            }
+
         }
-
     }
-
 }

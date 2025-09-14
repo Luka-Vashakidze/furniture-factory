@@ -54,14 +54,17 @@ public class Chair extends Furniture implements Buildable {
         }
         return total;
     }
+
     @Override
     public void assemble() {
         System.out.println("Chair assembled. " + getName());
     }
+
     @Override
     public void disassemble() {
         System.out.println("Chair disassembled. " + getName());
     }
+
     @Override
     public String toString() {
         return "chair: " + getName() + ", legs: " + legs + ", armrest: " + hasArmrest;

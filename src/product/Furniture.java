@@ -61,6 +61,7 @@ public class Furniture implements Discountable {
         BigDecimal discount = basePrice.multiply(percentage).divide(BigDecimal.valueOf(100));
         basePrice = basePrice.subtract(discount);
     }
+
     @Override
     public String toString() {
         return getName() + " (price: " + basePrice + ")";

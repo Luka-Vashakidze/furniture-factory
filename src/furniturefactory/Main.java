@@ -5,10 +5,14 @@ import interfaces.Buildable;
 import interfaces.Discountable;
 import interfaces.Payable;
 import interfaces.WorkAssignable;
-import people.*;
-import material.*;
-import product.*;
-import order.*;
+import material.Material;
+import order.Order;
+import people.Employee;
+import people.Manager;
+import people.Worker;
+import product.Chair;
+import product.Furniture;
+import product.Table;
 import service.EmployeeService;
 import service.OrderService;
 import workload.Workload;
@@ -61,20 +65,22 @@ public class Main {
             System.out.println(employee);
         }
 
+        OrderService.InterfaceService interfaceService = new OrderService.InterfaceService();
+
         for (Furniture furniture : factory.getFurnitureItems()) {
             if (furniture instanceof Buildable buildable) {
-                buildable.assemble();
+                interfaceService.assembleFurniture(buildable);
+
             }
         }
 
-        Discountable[] discountables = { (Discountable) factory.getFurnitureItems()[0], order1 };
-        for (Discountable d : discountables) {
-            d.applyDiscount(BigDecimal.valueOf(10));
+        Discountable[] discountables = {(Discountable) factory.getFurnitureItems()[0], order1};
+        for (Discountable discountable : discountables) {
+            discountable.applyDiscount(BigDecimal.valueOf(10));
         }
 
         for (Employee employee : factory.getEmployees()) {
-            if (employee instanceof WorkAssignable) {
-                WorkAssignable workAssignable = (WorkAssignable) employee;
+            if (employee instanceof WorkAssignable workAssignable) {
                 Workload wl = new Workload((Worker) employee, 5, LocalDateTime.now().plusDays(1));
                 workAssignable.assignWork(wl);
             }
@@ -82,7 +88,5 @@ public class Main {
 
         ((Payable) order1).pay(order1.calculateTotalPrice());
 
-        OrderService.InterfaceService interfaceService = new OrderService.InterfaceService();
-        interfaceService.assembleAllFurniture(factory.getFurnitureItems());
     }
 }

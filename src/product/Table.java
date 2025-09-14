@@ -83,10 +83,12 @@ public class Table extends Furniture implements Buildable {
     public int hashCode() {
         return getName().hashCode();
     }
+
     @Override
     public void assemble() {
         System.out.println("table assembled. " + getName());
     }
+
     @Override
     public void disassemble() {
         System.out.println("table disassembled. " + getName());
