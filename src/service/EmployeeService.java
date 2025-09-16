@@ -1,5 +1,6 @@
 package service;
 
+import exceptions.WorkAssignmentException;
 import people.Employee;
 import people.Manager;
 import people.Worker;
@@ -17,5 +18,18 @@ public final class EmployeeService {
         } else if (employee instanceof Manager) {
             System.out.println(employee.getName() + " is a Manager.");
         }
+    }
+
+    public void assignTask(Employee employee, String task) {
+        if (employee == null) {
+            throw new WorkAssignmentException("employee must not be null.");
+        }
+        if (task == null || task.isBlank()) {
+            throw new WorkAssignmentException("Task shouldn not be empty.");
+        }
+        if (employee instanceof Manager) {
+            throw new WorkAssignmentException("Managers cannot be assigned manual tasks: " + task);
+        }
+        System.out.println("Assigned task '" + task + "' to " + employee.getName());
     }
 }

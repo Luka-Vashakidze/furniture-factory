@@ -2,6 +2,7 @@ package service;
 
 import exceptions.AssemblyFailedException;
 import exceptions.InsufficientMaterialsException;
+import exceptions.InvalidOrderException;
 import interfaces.Buildable;
 import order.Order;
 import product.Furniture;
@@ -20,15 +21,17 @@ public class OrderService {
     public OrderService() {
     }
 
-    public void placeOrder(Order order) {
-        if (order == null || order.getItems() == null) {
-            System.out.println("Cannot place an empty order.");
-            return;
+    public void placeOrder(Order order) throws InvalidOrderException {
+        if (order == null || order.getItems() == null || order.getItems().length == 0) {
+            throw new InvalidOrderException("Cannot place an empty order.");
         }
 
         orderCounter++;
 
         BigDecimal totalPrice = order.calculateTotalPrice();
+        if (totalPrice == null || totalPrice.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new InvalidOrderException("Order total must be positive.");
+        }
 
         System.out.println("Order #" + orderCounter + " for customer: " + order.getCustomerName());
         System.out.println("Total price: $" + totalPrice);
@@ -58,9 +61,9 @@ public class OrderService {
             }
 
             try (AssemblySession session = new AssemblySession(itemName)) {
-                System.out.println("Starting assembly .");
+                System.out.println("Starting assembly for: " + session.getItemName());
                 buildableItem.assemble();
-                System.out.println("Asembly finished.");
+                System.out.println("Assembly finished for: " + session.getItemName());
             } catch (Exception e) {
                 System.out.println("Assembly failed : " + e.getMessage());
             }

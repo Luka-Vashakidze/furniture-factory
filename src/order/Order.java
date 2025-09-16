@@ -1,5 +1,6 @@
 package order;
 
+import exceptions.PaymentException;
 import interfaces.Deliverable;
 import interfaces.Discountable;
 import interfaces.Payable;
@@ -102,6 +103,17 @@ public class Order implements Discountable, Deliverable, Payable {
 
     @Override
     public void pay(BigDecimal amount) {
+        if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new PaymentException("Payment amount must be positive.");
+        }
+        BigDecimal total = calculateTotalPrice();
+        if (total == null) {
+            throw new PaymentException("Unable to determine total price for payment.");
+        }
+        if (amount.compareTo(total) < 0) {
+            throw new PaymentException("Insufficient payment. Required: " + total + ", provided: " + amount);
+        }
+        paid = true;
         System.out.println("Paid: " + amount);
     }
 }

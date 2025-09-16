@@ -8,6 +8,10 @@ public class AssemblySession implements AutoCloseable {
         System.out.println("Opening assembly session for: " + itemName);
     }
 
+    public String getItemName() {
+        return itemName;
+    }
+
     @Override
     public void close() {
         System.out.println("Closing assembly session for: " + itemName);
