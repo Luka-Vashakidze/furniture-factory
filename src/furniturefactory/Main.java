@@ -1,5 +1,6 @@
 package furniturefactory;
 
+import exceptions.InvalidOrderException;
 import factory.Factory;
 import interfaces.Buildable;
 import interfaces.Discountable;
@@ -84,6 +85,15 @@ public class Main {
                 Workload wl = new Workload((Worker) employee, 5, LocalDateTime.now().plusDays(1));
                 workAssignable.assignWork(wl);
             }
+        }
+
+        OrderService orderService = new OrderService();
+        try {
+            orderService.placeOrder(order1);
+        } catch (InvalidOrderException e) {
+            System.err.println("failed to place order " + e.getMessage());
+        } finally {
+            System.out.println("Order finished ");
         }
 
         ((Payable) order1).pay(order1.calculateTotalPrice());
