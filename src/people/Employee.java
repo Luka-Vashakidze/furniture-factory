@@ -6,14 +6,14 @@ public abstract class Employee {
 
     private static int employeeCounter;
 
-    private Integer id;
-    protected String name;
-    protected Double salary;
-    private Workload workload;
-
     static {
         employeeCounter = 0;
     }
+
+    protected String name;
+    protected Double salary;
+    private Integer id;
+    private Workload workload;
 
     public Employee(int id, String name, double salary) {
         this.id = id;
@@ -22,11 +22,15 @@ public abstract class Employee {
         employeeCounter++;
     }
 
-    public abstract String getRoleDescription();
-
     public Employee() {
         employeeCounter++;
     }
+
+    public static int getEmployeeCounter() {
+        return employeeCounter;
+    }
+
+    public abstract String getRoleDescription();
 
     public int getId() {
         return id;
@@ -64,9 +68,5 @@ public abstract class Employee {
         if (percent > 0) {
             salary += salary * percent / 100;
         }
-    }
-
-    public static int getEmployeeCounter() {
-        return employeeCounter;
     }
 }

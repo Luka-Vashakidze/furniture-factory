@@ -4,28 +4,27 @@ import exceptions.PaymentException;
 import interfaces.Deliverable;
 import interfaces.Discountable;
 import interfaces.Payable;
-import material.Material;
 import product.Furniture;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 public class Order implements Discountable, Deliverable, Payable {
 
     private static int orderCounter;
 
+    static {
+        orderCounter = 0;
+    }
+
     private Integer orderId;
     private String customerName;
     private List<Furniture> items;
     private LocalDate orderDate;
-
     private boolean delivered;
     private boolean paid;
-
-    static {
-        orderCounter = 0;
-    }
 
     public Order(int orderId, String customerName, List<Furniture> items, LocalDate orderDate) {
         this.orderId = orderId;
@@ -37,6 +36,10 @@ public class Order implements Discountable, Deliverable, Payable {
 
     public Order() {
         orderCounter++;
+    }
+
+    public static int getOrderCounter() {
+        return orderCounter;
     }
 
     public int getOrderId() {
@@ -75,9 +78,9 @@ public class Order implements Discountable, Deliverable, Payable {
         BigDecimal total = BigDecimal.ZERO;
 
         if (items != null) {
-            for (Furniture f : items) {
-                if (f != null) {
-                    total = total.add(f.calculateTotalCost());
+            for (Furniture furniture : items) {
+                if (furniture != null) {
+                    total = total.add(furniture.calculateTotalCost());
                 }
             }
         }
@@ -85,16 +88,12 @@ public class Order implements Discountable, Deliverable, Payable {
         return total;
     }
 
-    public static int getOrderCounter() {
-        return orderCounter;
-    }
-
     @Override
     public void applyDiscount(BigDecimal percentage) {
         if (items == null || items.isEmpty()) return;
-        for (Furniture f : items) {
-            if (f instanceof Discountable d) {
-                d.applyDiscount(percentage);
+        for (Furniture furniture : items) {
+            if (furniture instanceof Discountable discountable) {
+                discountable.applyDiscount(percentage);
             }
         }
     }
@@ -118,5 +117,19 @@ public class Order implements Discountable, Deliverable, Payable {
         }
         paid = true;
         System.out.println("Paid: " + amount);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Order other))
+            return false;
+        return Objects.equals(this.orderId, other.orderId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderId);
     }
 }

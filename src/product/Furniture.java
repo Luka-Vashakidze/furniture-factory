@@ -8,9 +8,9 @@ import java.util.List;
 
 public class Furniture implements Discountable {
 
-    private String name;
     protected BigDecimal basePrice;
     protected List<Material> materials;
+    private String name;
 
     public Furniture(String name, BigDecimal basePrice, List<Material>
             materials) {
@@ -50,8 +50,8 @@ public class Furniture implements Discountable {
         BigDecimal total = basePrice;
 
         if (materials != null) {
-            for (Material m : materials) {
-                total = total.add(m.calculateTotalCost());
+            for (Material material : materials) {
+                total = total.add(material.calculateTotalCost());
             }
         }
 

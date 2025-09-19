@@ -16,14 +16,14 @@ import product.Furniture;
 import product.Table;
 import service.EmployeeService;
 import service.OrderService;
+import util.Box;
+import util.Pair;
 import workload.Workload;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
-import util.Box;
-import util.Pair;
 
 
 public class Main {
@@ -90,9 +90,16 @@ public class Main {
         System.out.println("First map key (orderId): " + firstEntry.getKey().getOrderId() +
                 ", value size: " + (firstEntry.getValue() != null ? firstEntry.getValue().size() : 0));
 
+        for (Map.Entry<Order, List<Furniture>> entry : orderItemsMap.entrySet()) {
+            Order entryOrder = entry.getKey();
+            List<Furniture> entryItems = entry.getValue();
+            System.out.println("OrderId: " + entryOrder.getOrderId() +
+                    ", items count: " + (entryItems == null ? 0 : entryItems.size()));
+        }
+
         List<Furniture> fetched = orderItemsMap.get(order1);
         System.out.println("Fetched list equals factory list? " + (fetched == factory.getFurnitureItems()));
-        orderItemsMap.remove(new Order(999, "Nobody", Collections.emptyList(), LocalDate.now())); // will not remove
+        orderItemsMap.remove(new Order(11, "Nobody", Collections.emptyList(), LocalDate.now()));
         System.out.println("Contains order1? " + orderItemsMap.containsKey(order1));
 
         List<Order> orders = new ArrayList<>();

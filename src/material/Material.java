@@ -6,13 +6,13 @@ public class Material {
 
     private static int materialCounter;
 
-    private String name;
-    private BigDecimal pricePerUnit;
-    private int quantityInStock;
-
     static {
         materialCounter = 0;
     }
+
+    private String name;
+    private BigDecimal pricePerUnit;
+    private int quantityInStock;
 
     public Material(String name, BigDecimal pricePerUnit, int quantityInStock) {
         this.name = name;
@@ -23,6 +23,10 @@ public class Material {
 
     public Material() {
         materialCounter++;
+    }
+
+    public static int getMaterialCounter() {
+        return materialCounter;
     }
 
     public String getName() {
@@ -51,9 +55,5 @@ public class Material {
 
     public BigDecimal calculateTotalCost() {
         return pricePerUnit.multiply(BigDecimal.valueOf(quantityInStock));
-    }
-
-    public static int getMaterialCounter() {
-        return materialCounter;
     }
 }

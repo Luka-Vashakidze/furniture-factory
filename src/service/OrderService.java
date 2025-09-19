@@ -21,6 +21,10 @@ public class OrderService {
     public OrderService() {
     }
 
+    public static int getOrderCounter() {
+        return orderCounter;
+    }
+
     public void placeOrder(Order order) throws InvalidOrderException {
         if (order == null || order.getItems() == null || order.getItems().isEmpty()) {
             throw new InvalidOrderException("Cannot place an empty order.");
@@ -37,10 +41,6 @@ public class OrderService {
         System.out.println("Total price: $" + totalPrice);
     }
 
-    public static int getOrderCounter() {
-        return orderCounter;
-    }
-
     public final void printSummary(Order order) {
         System.out.println("final order summary for: " + order.getCustomerName());
     }
@@ -53,9 +53,9 @@ public class OrderService {
             }
 
             String itemName = "Buildable item";
-            if (buildableItem instanceof Furniture f) {
-                itemName = f.getName();
-                if (f.getMaterials() == null || f.getMaterials().isEmpty()) {
+            if (buildableItem instanceof Furniture furniture) {
+                itemName = furniture.getName();
+                if (furniture.getMaterials() == null || furniture.getMaterials().isEmpty()) {
                     throw new InsufficientMaterialsException("no materials for : " + itemName);
                 }
             }
