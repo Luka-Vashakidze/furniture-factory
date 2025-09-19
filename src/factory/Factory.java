@@ -5,42 +5,44 @@ import order.Order;
 import people.Employee;
 import product.Furniture;
 
+import java.util.List;
+
 public class Factory {
 
-    private Material[] materials;
-    private Furniture[] furnitureItems;
-    private Employee[] employees;
-    private Order[] orders;
+    private List<Material> materials;
+    private List<Furniture> furnitureItems;
+    private List<Employee> employees;
+    private List<Order> orders;
 
-    public Material[] getMaterials() {
+    public List<Material> getMaterials() {
         return materials;
     }
 
-    public void setMaterials(Material[] materials) {
+    public void setMaterials(List<Material> materials) {
         this.materials = materials;
     }
 
-    public Furniture[] getFurnitureItems() {
+    public List<Furniture> getFurnitureItems() {
         return furnitureItems;
     }
 
-    public void setFurnitureItems(Furniture[] furnitureItems) {
+    public void setFurnitureItems(List<Furniture> furnitureItems) {
         this.furnitureItems = furnitureItems;
     }
 
-    public Employee[] getEmployees() {
+    public List<Employee> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(Employee[] employees) {
+    public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
 
-    public Order[] getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(Order[] orders) {
+    public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
 }

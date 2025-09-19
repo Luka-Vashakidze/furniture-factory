@@ -4,10 +4,12 @@ import exceptions.PaymentException;
 import interfaces.Deliverable;
 import interfaces.Discountable;
 import interfaces.Payable;
+import material.Material;
 import product.Furniture;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Order implements Discountable, Deliverable, Payable {
 
@@ -15,7 +17,7 @@ public class Order implements Discountable, Deliverable, Payable {
 
     private Integer orderId;
     private String customerName;
-    private Furniture[] items;
+    private List<Furniture> items;
     private LocalDate orderDate;
 
     private boolean delivered;
@@ -25,7 +27,7 @@ public class Order implements Discountable, Deliverable, Payable {
         orderCounter = 0;
     }
 
-    public Order(int orderId, String customerName, Furniture[] items, LocalDate orderDate) {
+    public Order(int orderId, String customerName, List<Furniture> items, LocalDate orderDate) {
         this.orderId = orderId;
         this.customerName = customerName;
         this.items = items;
@@ -53,11 +55,11 @@ public class Order implements Discountable, Deliverable, Payable {
         this.customerName = customerName;
     }
 
-    public Furniture[] getItems() {
+    public List<Furniture> getItems() {
         return items;
     }
 
-    public void setItems(Furniture[] items) {
+    public void setItems(List<Furniture> items) {
         this.items = items;
     }
 
@@ -89,6 +91,7 @@ public class Order implements Discountable, Deliverable, Payable {
 
     @Override
     public void applyDiscount(BigDecimal percentage) {
+        if (items == null || items.isEmpty()) return;
         for (Furniture f : items) {
             if (f instanceof Discountable d) {
                 d.applyDiscount(percentage);

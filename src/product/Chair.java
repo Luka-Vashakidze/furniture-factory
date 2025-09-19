@@ -4,6 +4,7 @@ import interfaces.Buildable;
 import material.Material;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Chair extends Furniture implements Buildable {
 
@@ -11,7 +12,7 @@ public class Chair extends Furniture implements Buildable {
     private boolean hasArmrest;
     private double weightCapacity;
 
-    public Chair(String name, BigDecimal basePrice, Material[] materials, int legs, boolean hasArmrest, double weightCapacity) {
+    public Chair(String name, BigDecimal basePrice, List<Material> materials, int legs, boolean hasArmrest, double weightCapacity) {
         super(name, basePrice, materials);
         this.legs = legs;
         this.hasArmrest = hasArmrest;

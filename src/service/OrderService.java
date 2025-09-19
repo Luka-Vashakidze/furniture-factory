@@ -22,7 +22,7 @@ public class OrderService {
     }
 
     public void placeOrder(Order order) throws InvalidOrderException {
-        if (order == null || order.getItems() == null || order.getItems().length == 0) {
+        if (order == null || order.getItems() == null || order.getItems().isEmpty()) {
             throw new InvalidOrderException("Cannot place an empty order.");
         }
 
@@ -55,7 +55,7 @@ public class OrderService {
             String itemName = "Buildable item";
             if (buildableItem instanceof Furniture f) {
                 itemName = f.getName();
-                if (f.getMaterials() == null || f.getMaterials().length == 0) {
+                if (f.getMaterials() == null || f.getMaterials().isEmpty()) {
                     throw new InsufficientMaterialsException("no materials for : " + itemName);
                 }
             }

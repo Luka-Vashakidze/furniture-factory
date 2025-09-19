@@ -4,14 +4,16 @@ import interfaces.Discountable;
 import material.Material;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Furniture implements Discountable {
 
     private String name;
     protected BigDecimal basePrice;
-    protected Material[] materials;
+    protected List<Material> materials;
 
-    public Furniture(String name, BigDecimal basePrice, Material[] materials) {
+    public Furniture(String name, BigDecimal basePrice, List<Material>
+            materials) {
         this.name = name;
         this.basePrice = basePrice;
         this.materials = materials;
@@ -36,11 +38,11 @@ public class Furniture implements Discountable {
         this.basePrice = basePrice;
     }
 
-    public Material[] getMaterials() {
+    public List<Material> getMaterials() {
         return materials;
     }
 
-    public void setMaterials(Material[] materials) {
+    public void setMaterials(List<Material> materials) {
         this.materials = materials;
     }
 

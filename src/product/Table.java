@@ -4,6 +4,7 @@ import interfaces.Buildable;
 import material.Material;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Table extends Furniture implements Buildable {
 
@@ -12,7 +13,7 @@ public class Table extends Furniture implements Buildable {
     private int height;
     private boolean hasDrawers;
 
-    public Table(String name, BigDecimal basePrice, Material[] materials,
+    public Table(String name, BigDecimal basePrice, List<Material> materials,
                  int length, int width, int height, boolean hasDrawers) {
         super(name, basePrice, materials);
         this.length = length;
