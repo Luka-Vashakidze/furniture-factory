@@ -1,13 +1,20 @@
 package furniturefactory;
 
+import enums.EmployeeRank;
+import enums.OrderPriority;
+import enums.ProductCategory;
 import exceptions.InvalidOrderException;
 import factory.Factory;
 import interfaces.Buildable;
 import interfaces.Discountable;
 import interfaces.Payable;
 import interfaces.WorkAssignable;
+import interfaces.custom.PriceRule;
+import interfaces.custom.TriFunction;
+import interfaces.custom.WorkScheduler;
 import material.Material;
 import order.Order;
+import order.OrderSummary;
 import people.Employee;
 import people.Manager;
 import people.Worker;
@@ -24,7 +31,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
-
+import java.util.function.*;
 
 public class Main {
 
@@ -50,6 +57,9 @@ public class Main {
         Table table = new Table("Table Model B", BigDecimal.valueOf(200),
                 List.of(wood, metal), 150, 80, 75, true);
 
+        ProductCategory chairCategory = ProductCategory.CHAIR;
+        System.out.println(chairCategory.packingHint());
+
         List<Furniture> furnitureList = new ArrayList<>();
         furnitureList.add(chair);
         furnitureList.add(table);
@@ -59,6 +69,8 @@ public class Main {
         Worker worker2 = new Worker(2, "Taia", 1800.0, 4);
         Manager manager = new Manager(3, "Levan", 2500.0, "Production", 500);
 
+        double overtime = EmployeeRank.MID.overtimePay(20.0, 3);
+        System.out.println("Overtime example: " + overtime);
 
         Set<Employee> employeeSet = new HashSet<>();
         employeeSet.add(worker1);
@@ -81,6 +93,7 @@ public class Main {
         service.printEmployeeRole(manager);
 
         Order order1 = new Order(101, "Customer XYZ", factory.getFurnitureItems(), LocalDate.now());
+        order1.setPriority(OrderPriority.HIGH);
 
         Map<Order, List<Furniture>> orderItemsMap = new HashMap<>();
         orderItemsMap.put(order1, factory.getFurnitureItems());
@@ -158,5 +171,53 @@ public class Main {
 
         Box<Employee> employeeBox = new Box<>(firstFromSet != null ? firstFromSet : manager);
         System.out.println("Box contains employee: " + employeeBox.get().getName());
+
+        TriFunction<Integer, Integer, Integer, Integer> triAdder = (a, b, c) -> a + b + c;
+        System.out.println("TriFunction sum: " + triAdder.apply(1, 2, 3));
+
+        PriceRule addSmallFee = (item, curr) -> curr.add(BigDecimal.valueOf(5));
+        WorkScheduler scheduler = (w, wl) -> System.out.println("Scheduling " + w.getName() + " for " + wl.getHoursAssigned() + "h");
+        scheduler.schedule(worker1, worker1.getWorkload());
+
+        Predicate<Order> nonEmptyOrder = o -> o.getItems() != null && !o.getItems().isEmpty();
+        Function<Order, BigDecimal> totalCalc = Order::calculateTotalPrice;
+        Supplier<BigDecimal> seasonalDiscount = () -> BigDecimal.valueOf(5);
+        UnaryOperator<List<Furniture>> sortByName = list -> {
+            if (list == null) return List.of();
+            List<Furniture> copy = new ArrayList<>(list);
+            copy.sort(Comparator.comparing(Furniture::getName));
+            return copy;
+        };
+        BiFunction<Order, BigDecimal, Order> adjuster = (o, total) -> {
+            if (o.getItems() != null) {
+                for (Furniture f : o.getItems()) {
+                    f.setBasePrice(addSmallFee.apply(f, f.getBasePrice()));
+                }
+            }
+            return o;
+        };
+        Consumer<OrderSummary> afterEach = os -> System.out.println("Processed: " + os.pretty());
+        BiConsumer<Order, Exception> onError = (o, ex) -> System.err.println("Error for order " +
+                (o != null ? o.getOrderId() : "null") + ": " + ex.getMessage());
+
+        List<OrderSummary> processed = orderService.processOrders(
+                factory.getOrders(),
+                nonEmptyOrder,
+                totalCalc,
+                seasonalDiscount,
+                sortByName,
+                adjuster,
+                afterEach,
+                onError
+        );
+
+        System.out.println("Processed summaries count: " + processed.size());
+
+        ToIntFunction<Worker> skillFn = Worker::getSkillLevel;
+        BinaryOperator<BigDecimal> adder = BigDecimal::add;
+        BigDecimal totalBase = factory.getFurnitureItems().stream()
+                .map(Furniture::getBasePrice)
+                .reduce(BigDecimal.ZERO, adder);
+        System.out.println("Total base prices: " + totalBase + ", skill worker1: " + skillFn.applyAsInt(worker1));
     }
 }

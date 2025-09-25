@@ -1,5 +1,7 @@
 package order;
 
+import enums.OrderPriority;
+import enums.OrderStatus;
 import exceptions.PaymentException;
 import interfaces.Deliverable;
 import interfaces.Discountable;
@@ -25,6 +27,8 @@ public class Order implements Discountable, Deliverable, Payable {
     private LocalDate orderDate;
     private boolean delivered;
     private boolean paid;
+    private OrderStatus status = OrderStatus.NEW;
+    private OrderPriority priority = OrderPriority.NORMAL;
 
     public Order(int orderId, String customerName, List<Furniture> items, LocalDate orderDate) {
         this.orderId = orderId;
@@ -72,6 +76,21 @@ public class Order implements Discountable, Deliverable, Payable {
 
     public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
+    }
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        if (status != null) this.status = status;
+    }
+
+    public OrderPriority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(OrderPriority priority) {
+        if (priority != null) this.priority = priority;
     }
 
     public BigDecimal calculateTotalPrice() {

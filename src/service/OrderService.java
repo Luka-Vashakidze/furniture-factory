@@ -5,9 +5,13 @@ import exceptions.InsufficientMaterialsException;
 import exceptions.InvalidOrderException;
 import interfaces.Buildable;
 import order.Order;
+import order.OrderSummary;
 import product.Furniture;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.*;
 
 public class OrderService {
 
@@ -43,6 +47,55 @@ public class OrderService {
 
     public final void printSummary(Order order) {
         System.out.println("final order summary for: " + order.getCustomerName());
+    }
+    public List<OrderSummary> processOrders(
+            List<Order> orders,
+            Predicate<Order> filter,
+            Function<Order, BigDecimal> totalFn,
+            Supplier<BigDecimal> discountSupplier,
+            UnaryOperator<List<Furniture>> itemsOp,
+            BiFunction<Order, BigDecimal, Order> adjuster,
+            Consumer<OrderSummary> afterEach,
+            BiConsumer<Order, Exception> onError
+    ) {
+        List<OrderSummary> results = new ArrayList<>();
+        if (orders == null) return results;
+
+        for (Order o : orders) {
+            try {
+                if (o == null || !filter.test(o)) continue;
+
+                o.setItems(itemsOp.apply(o.getItems()));
+
+                BigDecimal base = totalFn.apply(o);
+                BigDecimal discountPercent = discountSupplier.get();
+                if (discountPercent != null && discountPercent.compareTo(BigDecimal.ZERO) > 0) {
+                    o.applyDiscount(discountPercent);
+                }
+
+                Order adjusted = adjuster.apply(o, o.calculateTotalPrice());
+
+                if (!adjusted.getStatus().isTerminal()) {
+                    adjusted.setStatus(adjusted.getStatus().next());
+                }
+
+                BigDecimal finalTotal = adjusted.getPriority().applySurcharge(adjusted.calculateTotalPrice());
+
+                OrderSummary summary = new OrderSummary(
+                        adjusted.getOrderId(),
+                        finalTotal,
+                        adjusted.getStatus(),
+                        adjusted.getPriority()
+                );
+                results.add(summary);
+                if (afterEach != null) afterEach.accept(summary);
+
+            } catch (Exception ex) {
+                if (onError != null) onError.accept(o, ex);
+            }
+        }
+
+        return results;
     }
 
     public static class InterfaceService {
