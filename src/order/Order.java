@@ -94,27 +94,20 @@ public class Order implements Discountable, Deliverable, Payable {
     }
 
     public BigDecimal calculateTotalPrice() {
-        BigDecimal total = BigDecimal.ZERO;
-
-        if (items != null) {
-            for (Furniture furniture : items) {
-                if (furniture != null) {
-                    total = total.add(furniture.calculateTotalCost());
-                }
-            }
-        }
-
-        return total;
+        if (items == null) return BigDecimal.ZERO;
+        return items.stream()
+                .filter(f -> f != null)
+                .map(Furniture::calculateTotalCost)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     @Override
     public void applyDiscount(BigDecimal percentage) {
         if (items == null || items.isEmpty()) return;
-        for (Furniture furniture : items) {
-            if (furniture instanceof Discountable discountable) {
-                discountable.applyDiscount(percentage);
-            }
-        }
+        items.stream()
+                .filter(f -> f instanceof Discountable)
+                .map(f -> (Discountable) f)
+                .forEach(d -> d.applyDiscount(percentage));
     }
 
     @Override

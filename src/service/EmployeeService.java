@@ -1,5 +1,6 @@
 package service;
 
+import annotations.Auditable;
 import exceptions.WorkAssignmentException;
 import people.Employee;
 import people.Manager;
@@ -20,6 +21,7 @@ public final class EmployeeService {
         }
     }
 
+    @Auditable("task-assignment")
     public void assignTask(Employee employee, String task) {
         if (employee == null) {
             throw new WorkAssignmentException("employee must not be null.");

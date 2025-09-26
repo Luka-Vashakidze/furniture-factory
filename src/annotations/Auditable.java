@@ -1,4 +1,9 @@
 package annotations;
 
-public interface Auditable {
+import java.lang.annotation.*;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE, ElementType.METHOD})
+public @interface Auditable {
+    String value() default "";
 }

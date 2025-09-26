@@ -1,11 +1,13 @@
 package people;
 
+import enums.EmployeeRank;
 import interfaces.WorkAssignable;
 import workload.Workload;
 
 public class Worker extends Employee implements WorkAssignable {
 
     private int skillLevel;
+    private EmployeeRank rank = EmployeeRank.MID;
 
     public Worker(Integer id, String name, double salary, int skillLevel) {
         super(id, name, salary);
@@ -29,9 +31,17 @@ public class Worker extends Employee implements WorkAssignable {
         this.skillLevel = skillLevel;
     }
 
+    public EmployeeRank getRank() {
+        return rank;
+    }
+
+    public void setRank(EmployeeRank rank) {
+        this.rank = rank;
+    }
+
     @Override
     public String toString() {
-        return "Worker{" + "id=" + getId() + ", name=" + getName() + ", skillLevel=" + skillLevel + '}';
+        return "Worker{" + "id=" + getId() + ", name=" + getName() + ", skillLevel=" + skillLevel + ", rank=" + rank.label() + '}';
     }
 
     @Override

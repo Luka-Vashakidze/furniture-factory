@@ -1,5 +1,7 @@
 package material;
 
+import enums.MaterialQuality;
+
 import java.math.BigDecimal;
 
 public class Material {
@@ -13,6 +15,8 @@ public class Material {
     private String name;
     private BigDecimal pricePerUnit;
     private int quantityInStock;
+    private MaterialQuality quality = MaterialQuality.BASIC;
+
 
     public Material(String name, BigDecimal pricePerUnit, int quantityInStock) {
         this.name = name;
@@ -52,6 +56,14 @@ public class Material {
     public void setQuantityInStock(int quantityInStock) {
         this.quantityInStock = quantityInStock;
     }
+    public MaterialQuality getQuality() {
+        return quality;
+    }
+
+    public void setQuality(MaterialQuality quality) {
+        this.quality = quality;
+    }
+
 
     public BigDecimal calculateTotalCost() {
         return pricePerUnit.multiply(BigDecimal.valueOf(quantityInStock));

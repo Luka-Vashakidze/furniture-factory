@@ -1,5 +1,6 @@
 package product;
 
+import enums.ProductCategory;
 import interfaces.Discountable;
 import material.Material;
 
@@ -11,6 +12,7 @@ public class Furniture implements Discountable {
     protected BigDecimal basePrice;
     protected List<Material> materials;
     private String name;
+    private ProductCategory category = ProductCategory.CHAIR;
 
     public Furniture(String name, BigDecimal basePrice, List<Material>
             materials) {
@@ -46,13 +48,22 @@ public class Furniture implements Discountable {
         this.materials = materials;
     }
 
+    public ProductCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(ProductCategory category) {
+        this.category = category;
+    }
+
     public BigDecimal calculateTotalCost() {
         BigDecimal total = basePrice;
 
         if (materials != null) {
-            for (Material material : materials) {
-                total = total.add(material.calculateTotalCost());
-            }
+            total = materials.stream()
+                    .filter(m -> m != null)
+                    .map(Material::calculateTotalCost)
+                    .reduce(total, BigDecimal::add);
         }
 
         return total;
@@ -66,6 +77,6 @@ public class Furniture implements Discountable {
 
     @Override
     public String toString() {
-        return getName() + " (price: " + basePrice + ")";
+        return getName() + " [" + category.title() + "] (price: " + basePrice + ", " + category.packingHint() + ")";
     }
 }

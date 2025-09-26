@@ -1,6 +1,8 @@
 package furniturefactory;
 
+import annotations.Auditable;
 import enums.EmployeeRank;
+import enums.MaterialQuality;
 import enums.OrderPriority;
 import enums.ProductCategory;
 import exceptions.InvalidOrderException;
@@ -25,13 +27,16 @@ import service.EmployeeService;
 import service.OrderService;
 import util.Box;
 import util.Pair;
+import util.ReflectionHelper;
 import workload.Workload;
 
+import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.*;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -43,6 +48,10 @@ public class Main {
         Material metal = new Material("Metal", BigDecimal.valueOf(30), 50);
         Material fabric = new Material("Fabric", BigDecimal.valueOf(20), 200);
 
+        wood.setQuality(MaterialQuality.PREMIUM);
+        metal.setQuality(MaterialQuality.BASIC);
+        fabric.setQuality(MaterialQuality.LUXURY);
+
         List<Material> materials = new ArrayList<>();
         materials.add(wood);
         materials.add(metal);
@@ -50,6 +59,9 @@ public class Main {
         System.out.println("Materials list size: " + materials.size());
         System.out.println("Materials isEmpty? " + materials.isEmpty());
         factory.setMaterials(materials);
+
+        long matCount = materials.stream().map(Material::getName).count();
+        System.out.println("Materials count via stream: " + matCount);
 
         Chair chair = new Chair("Chair Model A", BigDecimal.valueOf(100),
                 List.of(wood, fabric), 4, true, 120);
@@ -59,6 +71,10 @@ public class Main {
 
         ProductCategory chairCategory = ProductCategory.CHAIR;
         System.out.println(chairCategory.packingHint());
+
+        chair.setCategory(ProductCategory.CHAIR);
+        table.setCategory(ProductCategory.TABLE);
+
 
         List<Furniture> furnitureList = new ArrayList<>();
         furnitureList.add(chair);
@@ -103,12 +119,11 @@ public class Main {
         System.out.println("First map key (orderId): " + firstEntry.getKey().getOrderId() +
                 ", value size: " + (firstEntry.getValue() != null ? firstEntry.getValue().size() : 0));
 
-        for (Map.Entry<Order, List<Furniture>> entry : orderItemsMap.entrySet()) {
-            Order entryOrder = entry.getKey();
-            List<Furniture> entryItems = entry.getValue();
-            System.out.println("OrderId: " + entryOrder.getOrderId() +
-                    ", items count: " + (entryItems == null ? 0 : entryItems.size()));
-        }
+        //replaced for lop with mentries
+        orderItemsMap.entrySet().stream()
+                .forEach(entry -> System.out.println("OrderId: " + entry.getKey().getOrderId() +
+                        ", items count: " + (entry.getValue() == null ? 0 : entry.getValue().size())));
+
 
         List<Furniture> fetched = orderItemsMap.get(order1);
         System.out.println("Fetched list equals factory list? " + (fetched == factory.getFurnitureItems()));
@@ -120,40 +135,47 @@ public class Main {
         factory.setOrders(orders);
 
         System.out.println("Factory Furniture:");
-        for (Furniture furniture : factory.getFurnitureItems()) {
-            System.out.println(furniture);
-        }
+        // relpaced here for loop here
+        factory.getFurnitureItems().stream()
+                .map(Object::toString)
+                .forEach(System.out::println);
+
         Furniture firstFromList = factory.getFurnitureItems().isEmpty() ? null : factory.getFurnitureItems().get(0);
         if (firstFromList != null) {
             System.out.println("First furniture from list: " + firstFromList.getName());
         }
 
         System.out.println("\nEmployees:");
-        for (Employee employee : factory.getEmployees()) {
-            System.out.println(employee);
-        }
+        // replace here too
+        factory.getEmployees().stream()
+                .sorted(Comparator.comparing(Employee::getName))
+                .forEach(System.out::println);
+
 
         OrderService.InterfaceService interfaceService = new OrderService.InterfaceService();
+        //replaced for loop here too
+        factory.getFurnitureItems().stream()
+                .filter(f -> f instanceof Buildable)
+                .map(f -> (Buildable) f)
+                .forEach(interfaceService::assembleFurniture);
 
-        for (Furniture furniture : factory.getFurnitureItems()) {
-            if (furniture instanceof Buildable buildable) {
-                interfaceService.assembleFurniture(buildable);
-            }
-        }
 
         List<Discountable> discountables = new ArrayList<>();
         discountables.add((Discountable) factory.getFurnitureItems().get(0));
         discountables.add(order1);
-        for (Discountable discountable : discountables) {
-            discountable.applyDiscount(BigDecimal.valueOf(10));
-        }
 
-        for (Employee employee : factory.getEmployees()) {
-            if (employee instanceof WorkAssignable workAssignable) {
-                Workload wl = new Workload((Worker) employee, 5, LocalDateTime.now().plusDays(1));
-                workAssignable.assignWork(wl);
-            }
-        }
+        discountables.stream()
+                .forEach(d -> d.applyDiscount(BigDecimal.valueOf(10)));
+
+
+        factory.getEmployees().stream()
+                .filter(e -> e instanceof WorkAssignable)
+                .map(e -> (WorkAssignable) e)
+                .forEach(wa -> {
+                    Workload wl = new Workload((Worker) worker1, 5, LocalDateTime.now().plusDays(1));
+                    wa.assignWork(wl);
+                });
+
 
         OrderService orderService = new OrderService();
         try {
@@ -219,5 +241,34 @@ public class Main {
                 .map(Furniture::getBasePrice)
                 .reduce(BigDecimal.ZERO, adder);
         System.out.println("Total base prices: " + totalBase + ", skill worker1: " + skillFn.applyAsInt(worker1));
+
+        ReflectionHelper.printClassInfo(Order.class);
+        ReflectionHelper.printClassInfo(EmployeeService.class);
+
+        try {
+            Object w3 = ReflectionHelper.createInstance(
+                    Worker.class,
+                    new Class<?>[]{Integer.class, String.class, double.class, int.class},
+                    new Object[]{10, "Reflected", 1500.0, 3}
+            );
+            ReflectionHelper.callMethod(w3, "setSkillLevel", new Class<?>[]{int.class}, new Object[]{6});
+            Object role = ReflectionHelper.callMethod(w3, "getRoleDescription", new Class<?>[]{}, new Object[]{});
+            System.out.println("Reflected worker role: " + role);
+        } catch (Exception ex) {
+            System.err.println("Reflection error: " + ex.getMessage());
+        }
+
+
+        Arrays.stream(EmployeeService.class.getDeclaredMethods())
+                .filter(m -> m.isAnnotationPresent(Auditable.class))
+                .forEach(m -> System.out.println("Auditable method: " + m.getName()
+                        + ", modifiers=" + Modifier.toString(m.getModifiers())
+                        + ", returnType=" + m.getReturnType().getSimpleName()
+                        + ", params=" + Arrays.stream(m.getParameterTypes())
+                        .map(Class::getSimpleName)
+                        .collect(Collectors.joining(","))));
+
     }
+
+
 }
