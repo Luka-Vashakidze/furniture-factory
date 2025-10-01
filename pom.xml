@@ -17,17 +17,24 @@
         <maven.compiler.target>24</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.20.0</version>
+        </dependency>
+    </dependencies>
 
     <build>
-        <sourceDirectory>src</sourceDirectory>
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <source>24</source>
-                    <target>24</target>
+                    <source>21</source>
+                    <target>21</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -37,7 +44,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>furniturefactory.Main</mainClass>
+                            <mainClass>com.furniture.furniturefactory.furniturefactory.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
