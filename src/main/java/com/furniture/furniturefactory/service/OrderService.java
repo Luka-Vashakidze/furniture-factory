@@ -9,6 +9,8 @@ import com.furniture.furniturefactory.order.OrderSummary;
 import com.furniture.furniturefactory.product.Furniture;
 
 import java.math.BigDecimal;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.*;
@@ -16,10 +18,11 @@ import java.util.function.*;
 public class OrderService {
 
     private static int orderCounter;
+    private static final Logger logger = LogManager.getLogger(OrderService.class);
 
     static {
         orderCounter = 0;
-        System.out.println("OrderService initialized.");
+        logger.info("OrderService initialized.");
     }
 
     public OrderService() {
@@ -41,12 +44,12 @@ public class OrderService {
             throw new InvalidOrderException("Order total must be positive.");
         }
 
-        System.out.println("Order #" + orderCounter + " for customer: " + order.getCustomerName());
-        System.out.println("Total price: $" + totalPrice);
+        logger.info("Order #{} for customer: {}", orderCounter, order.getCustomerName());
+        logger.info("Total price: ${}", totalPrice);
     }
 
     public final void printSummary(Order order) {
-        System.out.println("final order summary for: " + order.getCustomerName());
+        logger.info("final order summary for: {}", order.getCustomerName());
     }
     public List<OrderSummary> processOrders(
             List<Order> orders,
@@ -114,11 +117,11 @@ public class OrderService {
             }
 
             try (AssemblySession session = new AssemblySession(itemName)) {
-                System.out.println("Starting assembly for: " + session.getItemName());
+                logger.info("Starting assembly for: {}", session.getItemName());
                 buildableItem.assemble();
-                System.out.println("Assembly finished for: " + session.getItemName());
+                logger.info("Assembly finished for: {}", session.getItemName());
             } catch (Exception e) {
-                System.out.println("Assembly failed : " + e.getMessage());
+                logger.error("Assembly failed: {}", e.getMessage());
             }
 
         }

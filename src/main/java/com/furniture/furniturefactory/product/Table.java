@@ -4,9 +4,12 @@ import com.furniture.furniturefactory.interfaces.Buildable;
 import com.furniture.furniturefactory.material.Material;
 
 import java.math.BigDecimal;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import java.util.List;
 
 public class Table extends Furniture implements Buildable {
+    private static final Logger logger = LogManager.getLogger(Table.class);
 
     private int length;
     private int width;
@@ -87,11 +90,11 @@ public class Table extends Furniture implements Buildable {
 
     @Override
     public void assemble() {
-        System.out.println("table assembled. " + getName());
+        logger.info("table assembled. {}", getName());
     }
 
     @Override
     public void disassemble() {
-        System.out.println("table disassembled. " + getName());
+        logger.info("table disassembled. {}", getName());
     }
 }

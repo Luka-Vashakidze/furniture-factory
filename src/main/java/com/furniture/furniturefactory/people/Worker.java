@@ -3,8 +3,11 @@ package com.furniture.furniturefactory.people;
 import com.furniture.furniturefactory.enums.EmployeeRank;
 import com.furniture.furniturefactory.interfaces.WorkAssignable;
 import com.furniture.furniturefactory.workload.Workload;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Worker extends Employee implements WorkAssignable {
+    private static final Logger logger = LogManager.getLogger(Worker.class);
 
     private int skillLevel;
     private EmployeeRank rank = EmployeeRank.MID;
@@ -59,6 +62,6 @@ public class Worker extends Employee implements WorkAssignable {
 
     @Override
     public void assignWork(Workload workload) {
-        System.out.println(getName() + " assigned workload: " + workload.getHoursAssigned() + " hours");
+        logger.info("{} assigned workload: {} hours", getName(), workload.getHoursAssigned());
     }
 }

@@ -7,33 +7,33 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public final class ReflectionHelper {
 
     private ReflectionHelper() {}
+    private static final Logger logger = LogManager.getLogger(ReflectionHelper.class);
 
     public static void printClassInfo(Class<?> clazz) {
-        System.out.println("class: " + clazz.getName());
-        System.out.println("Modifiers: " + Modifier.toString(clazz.getModifiers()));
+        logger.info("class: {}", clazz.getName());
+        logger.info("Modifiers: {}", Modifier.toString(clazz.getModifiers()));
 
-        System.out.println("fields:");
+        logger.info("fields:");
         for (Field f : clazz.getDeclaredFields()) {
-            System.out.println("  " + Modifier.toString(f.getModifiers()) + " " + f.getType().getSimpleName() + " " + f.getName());
+            logger.info("  {} {} {}", Modifier.toString(f.getModifiers()), f.getType().getSimpleName(), f.getName());
         }
 
-        System.out.println("constructors:");
+        logger.info("constructors:");
         for (Constructor<?> c : clazz.getDeclaredConstructors()) {
-            System.out.println("  " + Modifier.toString(c.getModifiers()) + " " + c.getName() + "(" +
-                    Arrays.toString(c.getParameterTypes()) + ")");
+            logger.info("  {} {}({})", Modifier.toString(c.getModifiers()), c.getName(), Arrays.toString(c.getParameterTypes()));
         }
 
-        System.out.println("Methods:");
+        logger.info("Methods:");
         for (Method m : clazz.getDeclaredMethods()) {
-            System.out.println("  " + Modifier.toString(m.getModifiers()) + " " +
-                    m.getReturnType().getSimpleName() + " " + m.getName() + "(" +
-                    Arrays.toString(m.getParameterTypes()) + ")");
+            logger.info("  {} {} {}({})", Modifier.toString(m.getModifiers()), m.getReturnType().getSimpleName(), m.getName(), Arrays.toString(m.getParameterTypes()));
             if (m.isAnnotationPresent(Auditable.class)) {
-                System.out.println("    @Auditable: " + m.getAnnotation(Auditable.class).value());
+                logger.info("    @Auditable: {}", m.getAnnotation(Auditable.class).value());
             }
         }
     }

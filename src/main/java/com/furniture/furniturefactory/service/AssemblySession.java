@@ -2,10 +2,11 @@ package com.furniture.furniturefactory.service;
 
 public class AssemblySession implements AutoCloseable {
     private final String itemName;
+    private static final org.apache.logging.log4j.Logger logger = org.apache.logging.log4j.LogManager.getLogger(AssemblySession.class);
 
     public AssemblySession(String itemName) {
         this.itemName = itemName;
-        System.out.println("Opening assembly session for: " + itemName);
+        logger.info("Opening assembly session for: {}", itemName);
     }
 
     public String getItemName() {
@@ -14,6 +15,6 @@ public class AssemblySession implements AutoCloseable {
 
     @Override
     public void close() {
-        System.out.println("Closing assembly session for: " + itemName);
+        logger.info("Closing assembly session for: {}", itemName);
     }
 }

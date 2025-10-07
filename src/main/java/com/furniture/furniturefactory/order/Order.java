@@ -9,11 +9,15 @@ import com.furniture.furniturefactory.interfaces.Payable;
 import com.furniture.furniturefactory.product.Furniture;
 
 import java.math.BigDecimal;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
 public class Order implements Discountable, Deliverable, Payable {
+
+    private static final Logger logger = LogManager.getLogger(Order.class);
 
     private static int orderCounter;
 
@@ -112,7 +116,7 @@ public class Order implements Discountable, Deliverable, Payable {
 
     @Override
     public void deliver() {
-        System.out.println("Order delivered.");
+        logger.info("Order delivered.");
     }
 
     @Override
@@ -128,7 +132,7 @@ public class Order implements Discountable, Deliverable, Payable {
             throw new PaymentException("Insufficient payment. Required: " + total + ", provided: " + amount);
         }
         paid = true;
-        System.out.println("Paid: " + amount);
+        logger.info("Paid: {}", amount);
     }
 
     @Override

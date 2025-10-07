@@ -1,0 +1,200 @@
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Materials list size: 3
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Materials isEmpty? false
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Materials count via stream: 3
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Ships flat-packed
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Overtime example: 75.0
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Employee set size: 3
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Employee set isEmpty? false
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - First employee from set (by iteration): Luka
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.service.EmployeeService - Luka new salary: 2200.0
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.service.EmployeeService - Levan is a Manager.
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - OrderItemsMap size: 1
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - First map key (orderId): 101, value size: 2
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - OrderId: 101, items count: 2
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Fetched list equals factory list? true
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Contains order1? true
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Factory Furniture:
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - chair: Chair Model A, legs: 4, armrest: true
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - table: Table Model B, size: 150x80x75, Drawers: true
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - First furniture from list: Chair Model A
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Employees:
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Manager: Levan, Department: Production, Bonus: 500.0
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Worker{id=1, name=Luka, skillLevel=5, rank=Mid}
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Worker{id=2, name=Taia, skillLevel=4, rank=Mid}
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.service.AssemblySession - Opening assembly session for: Chair Model A
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.service.OrderService - OrderService initialized.
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.service.OrderService - Starting assembly for: Chair Model A
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.product.Chair - Chair assembled. Chair Model A
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.service.OrderService - Assembly finished for: Chair Model A
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.service.AssemblySession - Closing assembly session for: Chair Model A
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.service.AssemblySession - Opening assembly session for: Table Model B
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.service.OrderService - Starting assembly for: Table Model B
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.product.Table - table assembled. Table Model B
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.service.OrderService - Assembly finished for: Table Model B
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.service.AssemblySession - Closing assembly session for: Table Model B
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.people.Worker - Luka assigned workload: 5 hours
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.people.Worker - Taia assigned workload: 5 hours
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.service.OrderService - Order #1 for customer: Customer XYZ
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.service.OrderService - Total price: $15806
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Order finished 
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.order.Order - Paid: 15806
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Pair -> TotalEmployees: 3
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Box contains employee: Luka
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - TriFunction sum: 6
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Scheduling Luka for 10h
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Processed: OrderSummary{id=101, total=16593.0975, status=PROCESSING, priority=HIGH}
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Processed summaries count: 1
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Total base prices: 257.95, skill worker1: 5
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper - class: com.furniture.furniturefactory.order.Order
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper - Modifiers: public
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper - fields:
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private static final Logger logger
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private static int orderCounter
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private Integer orderId
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private String customerName
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private List items
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private LocalDate orderDate
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private boolean delivered
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private boolean paid
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private OrderStatus status
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private OrderPriority priority
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper - constructors:
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public com.furniture.furniturefactory.order.Order([int, class java.lang.String, interface java.util.List, class java.time.LocalDate])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public com.furniture.furniturefactory.order.Order([])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper - Methods:
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public boolean equals([class java.lang.Object])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public int hashCode([])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void setPriority([class com.furniture.furniturefactory.enums.OrderPriority])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public OrderPriority getPriority([])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public BigDecimal calculateTotalPrice([])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void applyDiscount([class java.math.BigDecimal])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public int getOrderId([])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public List getItems([])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void pay([class java.math.BigDecimal])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public OrderStatus getStatus([])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private static boolean lambda$calculateTotalPrice$0([class com.furniture.furniturefactory.product.Furniture])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void setItems([interface java.util.List])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void deliver([])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void setStatus([class com.furniture.furniturefactory.enums.OrderStatus])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void setOrderId([int])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void setCustomerName([class java.lang.String])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public String getCustomerName([])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private static void lambda$applyDiscount$2([class java.math.BigDecimal, interface com.furniture.furniturefactory.interfaces.Discountable])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private static boolean lambda$applyDiscount$0([class com.furniture.furniturefactory.product.Furniture])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public static int getOrderCounter([])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public LocalDate getOrderDate([])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void setOrderDate([class java.time.LocalDate])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private static Discountable lambda$applyDiscount$1([class com.furniture.furniturefactory.product.Furniture])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper - class: com.furniture.furniturefactory.service.EmployeeService
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper - Modifiers: public final
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper - fields:
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private static final Logger logger
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper - constructors:
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public com.furniture.furniturefactory.service.EmployeeService([])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper - Methods:
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void printEmployeeRole([class com.furniture.furniturefactory.people.Employee])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void giveRaise([class com.furniture.furniturefactory.people.Employee, double])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void assignTask([class com.furniture.furniturefactory.people.Employee, class java.lang.String])
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -     @Auditable: task-assignment
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Reflected worker role: Worker with skill level 6
+2025-10-07 16:21:45 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Auditable method: assignTask, modifiers=public, returnType=void, params=Employee,String
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Materials list size: 3
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Materials isEmpty? false
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Materials count via stream: 3
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Ships flat-packed
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Overtime example: 75.0
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Employee set size: 3
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Employee set isEmpty? false
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - First employee from set (by iteration): Luka
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.service.EmployeeService - Luka new salary: 2200.0
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.service.EmployeeService - Levan is a Manager.
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - OrderItemsMap size: 1
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - First map key (orderId): 101, value size: 2
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - OrderId: 101, items count: 2
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Fetched list equals factory list? true
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Contains order1? true
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Factory Furniture:
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - chair: Chair Model A, legs: 4, armrest: true
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - table: Table Model B, size: 150x80x75, Drawers: true
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - First furniture from list: Chair Model A
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Employees:
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Manager: Levan, Department: Production, Bonus: 500.0
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Worker{id=1, name=Luka, skillLevel=5, rank=Mid}
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Worker{id=2, name=Taia, skillLevel=4, rank=Mid}
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.service.AssemblySession - Opening assembly session for: Chair Model A
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.service.OrderService - OrderService initialized.
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.service.OrderService - Starting assembly for: Chair Model A
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.product.Chair - Chair assembled. Chair Model A
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.service.OrderService - Assembly finished for: Chair Model A
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.service.AssemblySession - Closing assembly session for: Chair Model A
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.service.AssemblySession - Opening assembly session for: Table Model B
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.service.OrderService - Starting assembly for: Table Model B
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.product.Table - table assembled. Table Model B
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.service.OrderService - Assembly finished for: Table Model B
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.service.AssemblySession - Closing assembly session for: Table Model B
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.people.Worker - Luka assigned workload: 5 hours
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.people.Worker - Taia assigned workload: 5 hours
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.service.OrderService - Order #1 for customer: Customer XYZ
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.service.OrderService - Total price: $15806
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Order finished 
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.order.Order - Paid: 15806
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Pair -> TotalEmployees: 3
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Box contains employee: Luka
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - TriFunction sum: 6
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Scheduling Luka for 10h
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Processed: OrderSummary{id=101, total=16593.0975, status=PROCESSING, priority=HIGH}
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Processed summaries count: 1
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Total base prices: 257.95, skill worker1: 5
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper - class: com.furniture.furniturefactory.order.Order
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper - Modifiers: public
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper - fields:
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private static final Logger logger
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private static int orderCounter
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private Integer orderId
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private String customerName
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private List items
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private LocalDate orderDate
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private boolean delivered
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private boolean paid
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private OrderStatus status
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private OrderPriority priority
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper - constructors:
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public com.furniture.furniturefactory.order.Order([int, class java.lang.String, interface java.util.List, class java.time.LocalDate])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public com.furniture.furniturefactory.order.Order([])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper - Methods:
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public boolean equals([class java.lang.Object])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public int hashCode([])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void setPriority([class com.furniture.furniturefactory.enums.OrderPriority])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public OrderPriority getPriority([])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public int getOrderId([])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void pay([class java.math.BigDecimal])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public List getItems([])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public BigDecimal calculateTotalPrice([])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void applyDiscount([class java.math.BigDecimal])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public OrderStatus getStatus([])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private static boolean lambda$calculateTotalPrice$0([class com.furniture.furniturefactory.product.Furniture])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void setCustomerName([class java.lang.String])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public LocalDate getOrderDate([])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public static int getOrderCounter([])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void setOrderDate([class java.time.LocalDate])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private static Discountable lambda$applyDiscount$1([class com.furniture.furniturefactory.product.Furniture])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public String getCustomerName([])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private static boolean lambda$applyDiscount$0([class com.furniture.furniturefactory.product.Furniture])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private static void lambda$applyDiscount$2([class java.math.BigDecimal, interface com.furniture.furniturefactory.interfaces.Discountable])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void setOrderId([int])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void setStatus([class com.furniture.furniturefactory.enums.OrderStatus])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void deliver([])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void setItems([interface java.util.List])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper - class: com.furniture.furniturefactory.service.EmployeeService
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper - Modifiers: public final
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper - fields:
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   private static final Logger logger
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper - constructors:
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public com.furniture.furniturefactory.service.EmployeeService([])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper - Methods:
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void giveRaise([class com.furniture.furniturefactory.people.Employee, double])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void printEmployeeRole([class com.furniture.furniturefactory.people.Employee])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -   public void assignTask([class com.furniture.furniturefactory.people.Employee, class java.lang.String])
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.util.ReflectionHelper -     @Auditable: task-assignment
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Reflected worker role: Worker with skill level 6
+2025-10-07 16:21:48 INFO  [main] com.furniture.furniturefactory.furniturefactory.Main - Auditable method: assignTask, modifiers=public, returnType=void, params=Employee,String

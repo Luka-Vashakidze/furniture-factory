@@ -37,10 +37,13 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.Collectors;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Main {
 
     public static void main(String[] args) {
+        Logger logger = LogManager.getLogger(Main.class);
 
         Factory factory = new Factory();
 
@@ -56,12 +59,12 @@ public class Main {
         materials.add(wood);
         materials.add(metal);
         materials.add(fabric);
-        System.out.println("Materials list size: " + materials.size());
-        System.out.println("Materials isEmpty? " + materials.isEmpty());
+        logger.info("Materials list size: {}", materials.size());
+        logger.info("Materials isEmpty? {}", materials.isEmpty());
         factory.setMaterials(materials);
 
         long matCount = materials.stream().map(Material::getName).count();
-        System.out.println("Materials count via stream: " + matCount);
+        logger.info("Materials count via stream: {}", matCount);
 
         Chair chair = new Chair("Chair Model A", BigDecimal.valueOf(100),
                 List.of(wood, fabric), 4, true, 120);
@@ -70,7 +73,7 @@ public class Main {
                 List.of(wood, metal), 150, 80, 75, true);
 
         ProductCategory chairCategory = ProductCategory.CHAIR;
-        System.out.println(chairCategory.packingHint());
+        logger.info(chairCategory.packingHint());
 
         chair.setCategory(ProductCategory.CHAIR);
         table.setCategory(ProductCategory.TABLE);
@@ -86,18 +89,18 @@ public class Main {
         Manager manager = new Manager(3, "Levan", 2500.0, "Production", 500);
 
         double overtime = EmployeeRank.MID.overtimePay(20.0, 3);
-        System.out.println("Overtime example: " + overtime);
+        logger.info("Overtime example: {}", overtime);
 
         Set<Employee> employeeSet = new HashSet<>();
         employeeSet.add(worker1);
         employeeSet.add(worker2);
         employeeSet.add(manager);
-        System.out.println("Employee set size: " + employeeSet.size());
-        System.out.println("Employee set isEmpty? " + employeeSet.isEmpty());
+        logger.info("Employee set size: {}", employeeSet.size());
+        logger.info("Employee set isEmpty? {}", employeeSet.isEmpty());
 
         Employee firstFromSet = employeeSet.iterator().hasNext() ? employeeSet.iterator().next() : null;
         if (firstFromSet != null) {
-            System.out.println("First employee from set (by iteration): " + firstFromSet.getName());
+            logger.info("First employee from set (by iteration): {}", firstFromSet.getName());
         }
         factory.setEmployees(new ArrayList<>(employeeSet));
 
@@ -113,43 +116,41 @@ public class Main {
 
         Map<Order, List<Furniture>> orderItemsMap = new HashMap<>();
         orderItemsMap.put(order1, factory.getFurnitureItems());
-        System.out.println("OrderItemsMap size: " + orderItemsMap.size());
+        logger.info("OrderItemsMap size: {}", orderItemsMap.size());
 
         Map.Entry<Order, List<Furniture>> firstEntry = orderItemsMap.entrySet().iterator().next();
-        System.out.println("First map key (orderId): " + firstEntry.getKey().getOrderId() +
-                ", value size: " + (firstEntry.getValue() != null ? firstEntry.getValue().size() : 0));
+        logger.info("First map key (orderId): {}, value size: {}", firstEntry.getKey().getOrderId(), (firstEntry.getValue() != null ? firstEntry.getValue().size() : 0));
 
         //replaced for lop with mentries
         orderItemsMap.entrySet().stream()
-                .forEach(entry -> System.out.println("OrderId: " + entry.getKey().getOrderId() +
-                        ", items count: " + (entry.getValue() == null ? 0 : entry.getValue().size())));
+                .forEach(entry -> logger.info("OrderId: {}, items count: {}", entry.getKey().getOrderId(), (entry.getValue() == null ? 0 : entry.getValue().size())));
 
 
         List<Furniture> fetched = orderItemsMap.get(order1);
-        System.out.println("Fetched list equals factory list? " + (fetched == factory.getFurnitureItems()));
+        logger.info("Fetched list equals factory list? {}", (fetched == factory.getFurnitureItems()));
         orderItemsMap.remove(new Order(11, "Nobody", Collections.emptyList(), LocalDate.now()));
-        System.out.println("Contains order1? " + orderItemsMap.containsKey(order1));
+        logger.info("Contains order1? {}", orderItemsMap.containsKey(order1));
 
         List<Order> orders = new ArrayList<>();
         orders.add(order1);
         factory.setOrders(orders);
 
-        System.out.println("Factory Furniture:");
+        logger.info("Factory Furniture:");
         // relpaced here for loop here
         factory.getFurnitureItems().stream()
                 .map(Object::toString)
-                .forEach(System.out::println);
+                .forEach(item -> logger.info(item));
 
         Furniture firstFromList = factory.getFurnitureItems().isEmpty() ? null : factory.getFurnitureItems().get(0);
         if (firstFromList != null) {
-            System.out.println("First furniture from list: " + firstFromList.getName());
+            logger.info("First furniture from list: {}", firstFromList.getName());
         }
 
-        System.out.println("\nEmployees:");
+        logger.info("Employees:");
         // replace here too
         factory.getEmployees().stream()
                 .sorted(Comparator.comparing(Employee::getName))
-                .forEach(System.out::println);
+                .forEach(emp -> logger.info(emp));
 
 
         OrderService.InterfaceService interfaceService = new OrderService.InterfaceService();
@@ -181,24 +182,24 @@ public class Main {
         try {
             orderService.placeOrder(order1);
         } catch (InvalidOrderException e) {
-            System.err.println("failed to place order " + e.getMessage());
+            logger.error("failed to place order {}", e.getMessage());
         } finally {
-            System.out.println("Order finished ");
+            logger.info("Order finished ");
         }
 
         ((Payable) order1).pay(order1.calculateTotalPrice());
 
         Pair<String, Integer> summary = new Pair<>("TotalEmployees", factory.getEmployees().size());
-        System.out.println("Pair -> " + summary.getLeft() + ": " + summary.getRight());
+        logger.info("Pair -> {}: {}", summary.getLeft(), summary.getRight());
 
         Box<Employee> employeeBox = new Box<>(firstFromSet != null ? firstFromSet : manager);
-        System.out.println("Box contains employee: " + employeeBox.get().getName());
+        logger.info("Box contains employee: {}", employeeBox.get().getName());
 
         TriFunction<Integer, Integer, Integer, Integer> triAdder = (a, b, c) -> a + b + c;
-        System.out.println("TriFunction sum: " + triAdder.apply(1, 2, 3));
+        logger.info("TriFunction sum: {}", triAdder.apply(1, 2, 3));
 
         PriceRule addSmallFee = (item, curr) -> curr.add(BigDecimal.valueOf(5));
-        WorkScheduler scheduler = (w, wl) -> System.out.println("Scheduling " + w.getName() + " for " + wl.getHoursAssigned() + "h");
+        WorkScheduler scheduler = (w, wl) -> logger.info("Scheduling {} for {}h", w.getName(), wl.getHoursAssigned());
         scheduler.schedule(worker1, worker1.getWorkload());
 
         Predicate<Order> nonEmptyOrder = o -> o.getItems() != null && !o.getItems().isEmpty();
@@ -218,9 +219,8 @@ public class Main {
             }
             return o;
         };
-        Consumer<OrderSummary> afterEach = os -> System.out.println("Processed: " + os.pretty());
-        BiConsumer<Order, Exception> onError = (o, ex) -> System.err.println("Error for order " +
-                (o != null ? o.getOrderId() : "null") + ": " + ex.getMessage());
+        Consumer<OrderSummary> afterEach = os -> logger.info("Processed: {}", os.pretty());
+        BiConsumer<Order, Exception> onError = (o, ex) -> logger.error("Error for order {}: {}", (o != null ? o.getOrderId() : "null"), ex.getMessage());
 
         List<OrderSummary> processed = orderService.processOrders(
                 factory.getOrders(),
@@ -233,14 +233,14 @@ public class Main {
                 onError
         );
 
-        System.out.println("Processed summaries count: " + processed.size());
+        logger.info("Processed summaries count: {}", processed.size());
 
         ToIntFunction<Worker> skillFn = Worker::getSkillLevel;
         BinaryOperator<BigDecimal> adder = BigDecimal::add;
         BigDecimal totalBase = factory.getFurnitureItems().stream()
                 .map(Furniture::getBasePrice)
                 .reduce(BigDecimal.ZERO, adder);
-        System.out.println("Total base prices: " + totalBase + ", skill worker1: " + skillFn.applyAsInt(worker1));
+        logger.info("Total base prices: {}, skill worker1: {}", totalBase, skillFn.applyAsInt(worker1));
 
         ReflectionHelper.printClassInfo(Order.class);
         ReflectionHelper.printClassInfo(EmployeeService.class);
@@ -253,20 +253,17 @@ public class Main {
             );
             ReflectionHelper.callMethod(w3, "setSkillLevel", new Class<?>[]{int.class}, new Object[]{6});
             Object role = ReflectionHelper.callMethod(w3, "getRoleDescription", new Class<?>[]{}, new Object[]{});
-            System.out.println("Reflected worker role: " + role);
+            logger.info("Reflected worker role: {}", role);
         } catch (Exception ex) {
-            System.err.println("Reflection error: " + ex.getMessage());
+            logger.error("Reflection error: {}", ex.getMessage());
         }
 
 
         Arrays.stream(EmployeeService.class.getDeclaredMethods())
                 .filter(m -> m.isAnnotationPresent(Auditable.class))
-                .forEach(m -> System.out.println("Auditable method: " + m.getName()
-                        + ", modifiers=" + Modifier.toString(m.getModifiers())
-                        + ", returnType=" + m.getReturnType().getSimpleName()
-                        + ", params=" + Arrays.stream(m.getParameterTypes())
-                        .map(Class::getSimpleName)
-                        .collect(Collectors.joining(","))));
+                .forEach(m -> logger.info("Auditable method: {}, modifiers={}, returnType={}, params={}", m.getName(),
+                        Modifier.toString(m.getModifiers()), m.getReturnType().getSimpleName(),
+                        Arrays.stream(m.getParameterTypes()).map(Class::getSimpleName).collect(Collectors.joining(","))));
 
     }
 
