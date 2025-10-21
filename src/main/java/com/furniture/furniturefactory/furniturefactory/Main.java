@@ -264,7 +264,9 @@ public class Main {
                 .forEach(m -> logger.info("Auditable method: {}, modifiers={}, returnType={}, params={}", m.getName(),
                         Modifier.toString(m.getModifiers()), m.getReturnType().getSimpleName(),
                         Arrays.stream(m.getParameterTypes()).map(Class::getSimpleName).collect(Collectors.joining(","))));
-        System.out.println("hello from conflict-1");
+
+        System.out.println("hello from conflict-2");
+
     }
 
 
